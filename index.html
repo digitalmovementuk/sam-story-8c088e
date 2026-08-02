@@ -27,81 +27,88 @@
 <meta name="twitter:image" content="https://digitalmovementuk.github.io/sam-story-8c088e/og.jpg">
 <meta name="theme-color" content="#0c0b0a">
 <style>
+  /* one gutter value, used for the gaps and the page edge alike */
+  :root{--g:4px}
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{background:#0c0b0a;overflow-x:hidden;height:100%%}
-  body{overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth;
-       -webkit-overflow-scrolling:touch}
-  .s{height:100vh;height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;
-     overflow:hidden}
-  .s img{width:100%%;height:100%%;min-width:0;display:block;
-         object-fit:cover;object-position:center 40%%}
-  @media (prefers-reduced-motion:reduce){ body{scroll-behavior:auto} }
+  html{background:#0c0b0a}
+  body{background:#0c0b0a;overflow-x:hidden;padding:var(--g);
+       display:grid;gap:var(--g);grid-template-columns:repeat(2,1fr)}
+  body>img{width:100%%;aspect-ratio:1/1;object-fit:cover;object-position:center 38%%;
+           display:block;min-width:0;background:#151312}
+  @media (min-width:700px){ body{grid-template-columns:repeat(3,1fr)} }
+  @media (min-width:1100px){ body{grid-template-columns:repeat(4,1fr)} }
+  @media (min-width:1700px){ body{grid-template-columns:repeat(5,1fr)} }
+  /* one photo per screen while a picture is opened full size */
+  body>img.zoom{position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;
+                aspect-ratio:auto;object-fit:contain;background:#0c0b0a;z-index:9;cursor:zoom-out}
 </style>
 </head>
 <body>
-<div class="s"><img src="assets/01.jpg" alt="" ></div>
-<div class="s"><img src="assets/02.jpg" alt="" ></div>
-<div class="s"><img src="assets/03.jpg" alt="" ></div>
-<div class="s"><img src="assets/04.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/05.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/06.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/07.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/08.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/09.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/10.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/11.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/12.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/13.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/14.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/15.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/16.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/17.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/18.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/19.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/20.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/21.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/22.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/23.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/24.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/25.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/26.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/27.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/28.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/29.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/30.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/31.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/32.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/33.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/34.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/35.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/36.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/37.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/38.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/39.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/40.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/41.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/42.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/43.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/44.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/45.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/46.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/47.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/48.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/49.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/50.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/51.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/52.jpg" alt="" loading="lazy"></div>
-<div class="s"><img src="assets/53.jpg" alt="" loading="lazy"></div>
+<img src="assets/01.jpg" alt="">
+<img src="assets/02.jpg" alt="">
+<img src="assets/03.jpg" alt="">
+<img src="assets/04.jpg" alt="">
+<img src="assets/05.jpg" alt="">
+<img src="assets/06.jpg" alt="">
+<img src="assets/07.jpg" alt="">
+<img src="assets/08.jpg" alt="">
+<img src="assets/09.jpg" alt="" loading="lazy">
+<img src="assets/10.jpg" alt="" loading="lazy">
+<img src="assets/11.jpg" alt="" loading="lazy">
+<img src="assets/12.jpg" alt="" loading="lazy">
+<img src="assets/13.jpg" alt="" loading="lazy">
+<img src="assets/14.jpg" alt="" loading="lazy">
+<img src="assets/15.jpg" alt="" loading="lazy">
+<img src="assets/16.jpg" alt="" loading="lazy">
+<img src="assets/17.jpg" alt="" loading="lazy">
+<img src="assets/18.jpg" alt="" loading="lazy">
+<img src="assets/19.jpg" alt="" loading="lazy">
+<img src="assets/20.jpg" alt="" loading="lazy">
+<img src="assets/21.jpg" alt="" loading="lazy">
+<img src="assets/22.jpg" alt="" loading="lazy">
+<img src="assets/23.jpg" alt="" loading="lazy">
+<img src="assets/24.jpg" alt="" loading="lazy">
+<img src="assets/25.jpg" alt="" loading="lazy">
+<img src="assets/26.jpg" alt="" loading="lazy">
+<img src="assets/27.jpg" alt="" loading="lazy">
+<img src="assets/28.jpg" alt="" loading="lazy">
+<img src="assets/29.jpg" alt="" loading="lazy">
+<img src="assets/30.jpg" alt="" loading="lazy">
+<img src="assets/31.jpg" alt="" loading="lazy">
+<img src="assets/32.jpg" alt="" loading="lazy">
+<img src="assets/33.jpg" alt="" loading="lazy">
+<img src="assets/34.jpg" alt="" loading="lazy">
+<img src="assets/35.jpg" alt="" loading="lazy">
+<img src="assets/36.jpg" alt="" loading="lazy">
+<img src="assets/37.jpg" alt="" loading="lazy">
+<img src="assets/38.jpg" alt="" loading="lazy">
+<img src="assets/39.jpg" alt="" loading="lazy">
+<img src="assets/40.jpg" alt="" loading="lazy">
+<img src="assets/41.jpg" alt="" loading="lazy">
+<img src="assets/42.jpg" alt="" loading="lazy">
+<img src="assets/43.jpg" alt="" loading="lazy">
+<img src="assets/44.jpg" alt="" loading="lazy">
+<img src="assets/45.jpg" alt="" loading="lazy">
+<img src="assets/46.jpg" alt="" loading="lazy">
+<img src="assets/47.jpg" alt="" loading="lazy">
+<img src="assets/48.jpg" alt="" loading="lazy">
+<img src="assets/49.jpg" alt="" loading="lazy">
+<img src="assets/50.jpg" alt="" loading="lazy">
+<img src="assets/51.jpg" alt="" loading="lazy">
+<img src="assets/52.jpg" alt="" loading="lazy">
+<img src="assets/53.jpg" alt="" loading="lazy">
 <script>
-  var H=function(){return window.innerHeight};
-  function go(d){var i=Math.round(scrollY/H());scrollTo({top:Math.max(0,i+d)*H(),behavior:"smooth"});}
+  addEventListener("click",function(e){
+    var t=e.target;
+    if(t.tagName!=="IMG")return;
+    var z=document.querySelector("img.zoom");
+    if(z){z.classList.remove("zoom"); if(z!==t){t.classList.add("zoom");} return;}
+    t.classList.add("zoom");
+  });
   addEventListener("keydown",function(e){
-    if([" ","ArrowDown","ArrowRight","PageDown"].indexOf(e.key)>-1){e.preventDefault();go(1);}
-    if(["ArrowUp","ArrowLeft","PageUp"].indexOf(e.key)>-1){e.preventDefault();go(-1);}
-    if(e.key==="Home"){e.preventDefault();scrollTo({top:0,behavior:"smooth"});}
+    if(e.key==="Escape"){var z=document.querySelector("img.zoom"); if(z)z.classList.remove("zoom");}
     if(e.key==="f"||e.key==="F"){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}
   });
-  addEventListener("click",function(e){ go(e.clientX < innerWidth*0.25 ? -1 : 1); });
 </script>
 </body>
 </html>
