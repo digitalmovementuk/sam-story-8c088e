@@ -1,0 +1,600 @@
+[
+ {
+  "type": "chapter",
+  "title": "Baby"
+ },
+ {
+  "type": "photo",
+  "n": 1,
+  "file": "assets/01.jpg",
+  "src": "seite-07.jpg",
+  "chapter": "Baby",
+  "w": 1144,
+  "h": 1830,
+  "portrait": true
+ },
+ {
+  "type": "photo",
+  "n": 2,
+  "file": "assets/02.jpg",
+  "src": "seite-11.jpg",
+  "chapter": "Baby",
+  "w": 1612,
+  "h": 1127,
+  "portrait": false
+ },
+ {
+  "type": "photo",
+  "n": 3,
+  "file": "assets/03.jpg",
+  "src": "seite-01.jpg",
+  "chapter": "Baby",
+  "w": 1497,
+  "h": 2299,
+  "portrait": true
+ },
+ {
+  "type": "chapter",
+  "title": "Child"
+ },
+ {
+  "type": "photo",
+  "n": 4,
+  "file": "assets/04.jpg",
+  "src": "seite-05.jpg",
+  "chapter": "Child",
+  "w": 1602,
+  "h": 2368,
+  "portrait": true
+ },
+ {
+  "type": "photo",
+  "n": 5,
+  "file": "assets/05.jpg",
+  "src": "seite-03.jpg",
+  "chapter": "Child",
+  "w": 1444,
+  "h": 2133,
+  "portrait": true
+ },
+ {
+  "type": "photo",
+  "n": 6,
+  "file": "assets/06.jpg",
+  "src": "seite-12.jpg",
+  "chapter": "Child",
+  "w": 1765,
+  "h": 1222,
+  "portrait": false
+ },
+ {
+  "type": "photo",
+  "n": 7,
+  "file": "assets/07.jpg",
+  "src": "seite-13.jpg",
+  "chapter": "Child",
+  "w": 1307,
+  "h": 2027,
+  "portrait": true
+ },
+ {
+  "type": "photo",
+  "n": 8,
+  "file": "assets/08.jpg",
+  "src": "seite-08.jpg",
+  "chapter": "Child",
+  "w": 1389,
+  "h": 2068,
+  "portrait": true
+ },
+ {
+  "type": "photo",
+  "n": 9,
+  "file": "assets/09.jpg",
+  "src": "seite-09.jpg",
+  "chapter": "Child",
+  "w": 1696,
+  "h": 1190,
+  "portrait": false
+ },
+ {
+  "type": "photo",
+  "n": 10,
+  "file": "assets/10.jpg",
+  "src": "seite-02.jpg",
+  "chapter": "Child",
+  "w": 1740,
+  "h": 1226,
+  "portrait": false
+ },
+ {
+  "type": "photo",
+  "n": 11,
+  "file": "assets/11.jpg",
+  "src": "BILD1094_2_2.JPG",
+  "chapter": "Child",
+  "w": 543,
+  "h": 543,
+  "portrait": false
+ },
+ {
+  "type": "chapter",
+  "title": "Sam/Raoul"
+ },
+ {
+  "type": "chapter",
+  "title": "Bonn"
+ },
+ {
+  "type": "photo",
+  "n": 12,
+  "file": "assets/12.jpg",
+  "src": "931465c4-36b4-4f53-9175-f40ba7092bcb.JPG",
+  "chapter": "Bonn",
+  "w": 842,
+  "h": 1368,
+  "portrait": true
+ },
+ {
+  "type": "photo",
+  "n": 13,
+  "file": "assets/13.jpg",
+  "src": "2013-06-16 00.35.09.png",
+  "chapter": "Bonn",
+  "w": 1136,
+  "h": 640,
+  "portrait": false
+ },
+ {
+  "type": "photo",
+  "n": 14,
+  "file": "assets/14.jpg",
+  "src": "image 2.jpg",
+  "chapter": "Bonn",
+  "w": 640,
+  "h": 480,
+  "portrait": false
+ },
+ {
+  "type": "photo",
+  "n": 15,
+  "file": "assets/15.jpg",
+  "src": "image.jpg",
+  "chapter": "Bonn",
+  "w": 640,
+  "h": 480,
+  "portrait": false
+ },
+ {
+  "type": "chapter",
+  "title": "Johnny!"
+ },
+ {
+  "type": "photo",
+  "n": 16,
+  "file": "assets/16.jpg",
+  "src": "135733_10150363935150313_6242567_o.jpg",
+  "chapter": "Johnny!",
+  "w": 768,
+  "h": 1024,
+  "portrait": true
+ },
+ {
+  "type": "photo",
+  "n": 17,
+  "file": "assets/17.jpg",
+  "src": "0d05664f-86f6-4954-b617-0614d1b3f5f5.JPG",
+  "chapter": "Johnny!",
+  "w": 899,
+  "h": 1600,
+  "portrait": true
+ },
+ {
+  "type": "photo",
+  "n": 18,
+  "file": "assets/18.jpg",
+  "src": "IMG_0501.jpg",
+  "chapter": "Johnny!",
+  "w": 640,
+  "h": 480,
+  "portrait": false
+ },
+ {
+  "type": "chapter",
+  "title": "Valencia"
+ },
+ {
+  "type": "photo",
+  "n": 19,
+  "file": "assets/19.jpg",
+  "src": "IMG_4602.PNG",
+  "chapter": "Valencia",
+  "w": 750,
+  "h": 737,
+  "portrait": false
+ },
+ {
+  "type": "photo",
+  "n": 20,
+  "file": "assets/20.jpg",
+  "src": "WhatsApp Image 2026-07-03 at 10.32.59.jpeg",
+  "chapter": "Valencia",
+  "w": 2000,
+  "h": 1324,
+  "portrait": false
+ },
+ {
+  "type": "photo",
+  "n": 21,
+  "file": "assets/21.jpg",
+  "src": "WhatsApp Image 2026-07-07 at 10.41.56.jpeg",
+  "chapter": "Valencia",
+  "w": 1080,
+  "h": 812,
+  "portrait": false
+ },
+ {
+  "type": "chapter",
+  "title": "Yves!"
+ },
+ {
+  "type": "photo",
+  "n": 22,
+  "file": "assets/22.jpg",
+  "src": "IMG_4713.JPG",
+  "chapter": "Yves!",
+  "w": 2400,
+  "h": 1800,
+  "portrait": false
+ },
+ {
+  "type": "photo",
+  "n": 23,
+  "file": "assets/23.jpg",
+  "src": "efcbea16-9aa4-4ca6-8d39-566841ae289f.JPG",
+  "chapter": "Yves!",
+  "w": 1280,
+  "h": 960,
+  "portrait": false
+ },
+ {
+  "type": "chapter",
+  "title": "Russland"
+ },
+ {
+  "type": "photo",
+  "n": 24,
+  "file": "assets/24.jpg",
+  "src": "1a541a32-b2d1-45c8-868c-33a6094864c5.JPG",
+  "chapter": "Russland",
+  "w": 720,
+  "h": 1280,
+  "portrait": true
+ },
+ {
+  "type": "photo",
+  "n": 25,
+  "file": "assets/25.jpg",
+  "src": "329af9c6-895a-449a-bce0-3a3f03dc88ee.JPG",
+  "chapter": "Russland",
+  "w": 1280,
+  "h": 962,
+  "portrait": false
+ },
+ {
+  "type": "photo",
+  "n": 26,
+  "file": "assets/26.jpg",
+  "src": "WhatsApp Image 2026-07-05 at 14.23.04.jpeg",
+  "chapter": "Russland",
+  "w": 1600,
+  "h": 1598,
+  "portrait": false
+ },
+ {
+  "type": "chapter",
+  "title": "Fabi!"
+ },
+ {
+  "type": "photo",
+  "n": 27,
+  "file": "assets/27.jpg",
+  "src": "IMG_4733.JPG",
+  "chapter": "Fabi!",
+  "w": 1165,
+  "h": 853,
+  "portrait": false
+ },
+ {
+  "type": "chapter",
+  "title": "Bonn!"
+ },
+ {
+  "type": "photo",
+  "n": 28,
+  "file": "assets/28.jpg",
+  "src": "1eeeeca3-338a-4d45-9419-e4a5cab09a81.JPG",
+  "chapter": "Bonn!",
+  "w": 1024,
+  "h": 804,
+  "portrait": false
+ },
+ {
+  "type": "chapter",
+  "title": "Digital"
+ },
+ {
+  "type": "photo",
+  "n": 29,
+  "file": "assets/29.jpg",
+  "src": "1529b998-1a7e-4473-8e35-096f4a44c555.JPG",
+  "chapter": "Digital",
+  "w": 432,
+  "h": 935,
+  "portrait": true
+ },
+ {
+  "type": "chapter",
+  "title": "Lolya!"
+ },
+ {
+  "type": "photo",
+  "n": 30,
+  "file": "assets/30.jpg",
+  "src": "BB297403-588F-4336-AA76-AEF729519FB4.JPG",
+  "chapter": "Lolya!",
+  "w": 960,
+  "h": 1280,
+  "portrait": true
+ },
+ {
+  "type": "chapter",
+  "title": "Florenz"
+ },
+ {
+  "type": "photo",
+  "n": 31,
+  "file": "assets/31.jpg",
+  "src": "37da50ec-2e01-4eea-a052-2f3f368a48b7.JPG",
+  "chapter": "Florenz",
+  "w": 960,
+  "h": 1280,
+  "portrait": true
+ },
+ {
+  "type": "photo",
+  "n": 32,
+  "file": "assets/32.jpg",
+  "src": "IMG_4740.JPG",
+  "chapter": "Florenz",
+  "w": 1024,
+  "h": 768,
+  "portrait": false
+ },
+ {
+  "type": "photo",
+  "n": 33,
+  "file": "assets/33.jpg",
+  "src": "b86be10a-a9f4-472f-9a83-a394f1d062ef.JPG",
+  "chapter": "Florenz",
+  "w": 959,
+  "h": 959,
+  "portrait": false
+ },
+ {
+  "type": "photo",
+  "n": 34,
+  "file": "assets/34.jpg",
+  "src": "IMG_4707.JPG",
+  "chapter": "Florenz",
+  "w": 1024,
+  "h": 769,
+  "portrait": false
+ },
+ {
+  "type": "chapter",
+  "title": "Hochzeit"
+ },
+ {
+  "type": "photo",
+  "n": 35,
+  "file": "assets/35.jpg",
+  "src": "c9f914a1-b240-4ef3-95bc-420cf14cb700.JPG",
+  "chapter": "Hochzeit",
+  "w": 900,
+  "h": 1600,
+  "portrait": true
+ },
+ {
+  "type": "photo",
+  "n": 36,
+  "file": "assets/36.jpg",
+  "src": "PHOTO-2026-08-02-17-30-19.jpg",
+  "chapter": "Hochzeit",
+  "w": 1200,
+  "h": 1600,
+  "portrait": true
+ },
+ {
+  "type": "chapter",
+  "title": "Bonn"
+ },
+ {
+  "type": "photo",
+  "n": 37,
+  "file": "assets/37.jpg",
+  "src": "9b9c683f-4d8c-4f58-b579-264f582a227c.JPG",
+  "chapter": "Bonn",
+  "w": 1600,
+  "h": 1202,
+  "portrait": false
+ },
+ {
+  "type": "photo",
+  "n": 38,
+  "file": "assets/38.jpg",
+  "src": "0c727afe-8c6a-477e-8e87-67479f4e3095.JPG",
+  "chapter": "Bonn",
+  "w": 900,
+  "h": 1600,
+  "portrait": true
+ },
+ {
+  "type": "photo",
+  "n": 39,
+  "file": "assets/39.jpg",
+  "src": "8690e2d5-898a-448a-8684-425e4081cf2a.JPG",
+  "chapter": "Bonn",
+  "w": 900,
+  "h": 1600,
+  "portrait": true
+ },
+ {
+  "type": "photo",
+  "n": 40,
+  "file": "assets/40.jpg",
+  "src": "IMG_4729.JPG",
+  "chapter": "Bonn",
+  "w": 768,
+  "h": 1024,
+  "portrait": true
+ },
+ {
+  "type": "photo",
+  "n": 41,
+  "file": "assets/41.jpg",
+  "src": "c8e3fdb5-5ecb-4e63-a520-05caf4754900.JPG",
+  "chapter": "Bonn",
+  "w": 1600,
+  "h": 1200,
+  "portrait": false
+ },
+ {
+  "type": "photo",
+  "n": 42,
+  "file": "assets/42.jpg",
+  "src": "df19d66f-75d3-448d-98a5-ef8aa54a3fd5.JPG",
+  "chapter": "Bonn",
+  "w": 1024,
+  "h": 768,
+  "portrait": false
+ },
+ {
+  "type": "photo",
+  "n": 43,
+  "file": "assets/43.jpg",
+  "src": "fb72a42b-070b-456c-a764-089ed637c8f2.JPG",
+  "chapter": "Bonn",
+  "w": 1024,
+  "h": 768,
+  "portrait": false
+ },
+ {
+  "type": "chapter",
+  "title": "Hochzeit Johnny"
+ },
+ {
+  "type": "photo",
+  "n": 44,
+  "file": "assets/44.jpg",
+  "src": "IMG_4734.JPG",
+  "chapter": "Hochzeit Johnny",
+  "w": 1066,
+  "h": 857,
+  "portrait": false
+ },
+ {
+  "type": "photo",
+  "n": 45,
+  "file": "assets/45.jpg",
+  "src": "cbad63e2-dff0-45c2-b412-d7e9702d61ca.JPG",
+  "chapter": "Hochzeit Johnny",
+  "w": 1067,
+  "h": 1600,
+  "portrait": true
+ },
+ {
+  "type": "photo",
+  "n": 46,
+  "file": "assets/46.jpg",
+  "src": "11c66f8a-d0e9-49ef-9753-4941a4b1fccf.JPG",
+  "chapter": "Hochzeit Johnny",
+  "w": 960,
+  "h": 1280,
+  "portrait": true
+ },
+ {
+  "type": "photo",
+  "n": 47,
+  "file": "assets/47.jpg",
+  "src": "IMG_3552.HEIC",
+  "chapter": "Hochzeit Johnny",
+  "w": 1800,
+  "h": 2400,
+  "portrait": true
+ },
+ {
+  "type": "photo",
+  "n": 48,
+  "file": "assets/48.jpg",
+  "src": "WhatsApp Image 2026-07-05 at 14.23.00.jpeg",
+  "chapter": "Hochzeit Johnny",
+  "w": 1600,
+  "h": 1200,
+  "portrait": false
+ },
+ {
+  "type": "photo",
+  "n": 49,
+  "file": "assets/49.jpg",
+  "src": "WhatsApp Image 2026-07-03 at 09.38.17.jpeg",
+  "chapter": "Hochzeit Johnny",
+  "w": 1600,
+  "h": 1200,
+  "portrait": false
+ },
+ {
+  "type": "chapter",
+  "title": "Berlin"
+ },
+ {
+  "type": "photo",
+  "n": 50,
+  "file": "assets/50.jpg",
+  "src": "6d7a1038-af16-4cb2-a251-3576f309354d.JPG",
+  "chapter": "Berlin",
+  "w": 819,
+  "h": 1600,
+  "portrait": true
+ },
+ {
+  "type": "photo",
+  "n": 51,
+  "file": "assets/51.jpg",
+  "src": "857ce6a4-bce9-430d-83e5-9348903c7891.JPG",
+  "chapter": "Berlin",
+  "w": 1600,
+  "h": 1200,
+  "portrait": false
+ },
+ {
+  "type": "photo",
+  "n": 52,
+  "file": "assets/52.jpg",
+  "src": "WhatsApp Image 2026-07-05 at 23.42.31.jpeg",
+  "chapter": "Berlin",
+  "w": 1024,
+  "h": 769,
+  "portrait": false
+ },
+ {
+  "type": "photo",
+  "n": 53,
+  "file": "assets/53.jpg",
+  "src": "PHOTO-2026-08-02-17-32-32.jpg",
+  "chapter": "Berlin",
+  "w": 1200,
+  "h": 1600,
+  "portrait": true
+ }
+]

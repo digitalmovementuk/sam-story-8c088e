@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive,noimageindex">
+<meta name="referrer" content="no-referrer">
+<title>Sam &middot; Die Geschichte</title>
+<style>
+  :root{
+    --bg:#100e0d; --panel:#1a1715; --line:#2e2a26;
+    --ink:#f4ece1; --dim:#a8998a; --accent:#c9a227;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:var(--sans)}
+  body.present{overflow:hidden}
+
+  /* ---------- top bar ---------- */
+  #bar{position:fixed;top:0;left:0;right:0;height:56px;z-index:50;display:flex;align-items:center;
+       gap:10px;padding:0 18px;background:rgba(16,14,13,.94);border-bottom:1px solid var(--line);
+       backdrop-filter:blur(8px);transition:transform .25s}
+  #bar.hidden{transform:translateY(-100%)}
+  #bar h1{font-family:var(--serif);font-size:19px;font-weight:600;margin:0 auto 0 0;letter-spacing:.2px}
+  #bar h1 span{color:var(--dim);font-weight:400}
+  button{font:inherit;font-size:13px;padding:8px 14px;border-radius:6px;cursor:pointer;
+         background:var(--panel);color:var(--ink);border:1px solid var(--line)}
+  button:hover{border-color:#4a423a}
+  button.primary{background:var(--accent);color:#20180a;border-color:var(--accent);font-weight:600}
+  #status{font-size:12px;color:var(--dim);min-width:96px;text-align:right}
+
+  /* ---------- write mode ---------- */
+  #doc{max-width:1180px;margin:0 auto;padding:86px 24px 140px}
+  .chapter{margin:66px 0 26px;display:flex;align-items:baseline;gap:18px}
+  .chapter:first-child{margin-top:8px}
+  .chapter h2{font-family:var(--serif);font-size:40px;margin:0;color:var(--accent);font-weight:600}
+  .chapter i{flex:1;height:1px;background:var(--line)}
+  .row{display:grid;grid-template-columns:390px 1fr;gap:26px;align-items:stretch;
+       padding:18px;margin-bottom:14px;background:var(--panel);border:1px solid var(--line);border-radius:10px}
+  .row.active{border-color:var(--accent)}
+  .row>.say{display:flex;flex-direction:column}
+  .thumb{position:relative;border-radius:6px;display:flex;align-items:flex-start;justify-content:center}
+  .thumb img{max-width:100%;max-height:420px;width:auto;object-fit:contain;display:block;border-radius:4px}
+  .num{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.66);color:var(--ink);
+       font-size:12px;padding:3px 8px;border-radius:20px;letter-spacing:.5px}
+  textarea{width:100%;min-height:170px;background:transparent;border:0;resize:none;color:var(--ink);
+           font-family:var(--serif);font-size:21px;line-height:1.5;padding:6px 2px;outline:none;overflow:hidden}
+  textarea::placeholder{color:#5d534a;font-style:italic}
+  .meta{display:flex;justify-content:space-between;font-size:11px;color:#5d534a;margin-top:auto;
+        border-top:1px solid var(--line);padding-top:6px}
+
+  /* ---------- present mode ---------- */
+  #stage{display:none}
+  body.present #doc{display:none}
+  body.present #stage{display:block;height:100vh;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+  .slide{height:100vh;scroll-snap-align:start;scroll-snap-stop:always;display:grid;
+         grid-template-columns:1.15fr .85fr;gap:clamp(24px,4vw,72px);align-items:center;
+         padding:clamp(28px,5vh,70px) clamp(32px,5vw,90px)}
+  .slide .ph{display:flex;align-items:center;justify-content:center;height:100%}
+  .slide img{max-width:100%;max-height:84vh;object-fit:contain;border-radius:4px;
+             box-shadow:0 26px 70px rgba(0,0,0,.62)}
+  .slide .say{font-family:var(--serif);font-size:clamp(24px,2.05vw,44px);line-height:1.42;white-space:pre-wrap}
+  .slide.solo{grid-template-columns:1fr}
+  .slide.solo .say{display:none}
+  .slide.solo img{max-height:88vh}
+  .slide.chap{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .slide.chap h2{font-family:var(--serif);font-size:clamp(58px,9vw,150px);margin:0;color:var(--accent);font-weight:600}
+  #hud{position:fixed;bottom:0;left:0;right:0;z-index:40;display:none;align-items:center;gap:14px;
+       padding:12px 22px;font-size:13px;color:var(--dim);background:linear-gradient(transparent,rgba(0,0,0,.75))}
+  body.present #hud{display:flex}
+  #track{flex:1;height:2px;background:#332e29;border-radius:2px;overflow:hidden}
+  #fill{height:100%;width:0;background:var(--accent);transition:width .25s}
+  @media (max-width:900px){
+    .row{grid-template-columns:1fr}
+    .slide{grid-template-columns:1fr;grid-template-rows:1fr auto}
+    .slide img{max-height:52vh}
+  }
+</style>
+</head>
+<body>
+
+<div id="bar">
+  <h1>Sam &middot; <span>Die Geschichte</span></h1>
+  <span id="status"></span>
+  <button id="save">Sichern&nbsp;(JSON)</button>
+  <button id="loadBtn">Laden</button>
+  <input id="loadFile" type="file" accept="application/json" hidden>
+  <button id="export">Fertige Datei</button>
+  <button id="mode" class="primary">Pr&auml;sentation&nbsp;&#9654;</button>
+</div>
+
+<main id="doc"></main>
+<section id="stage"></section>
+<div id="hud"><span id="count"></span><span id="track"><span id="fill"></span></span><span id="chapNow"></span></div>
+
+<script id="slides-data" type="application/json">[{"type": "chapter", "title": "Baby"}, {"type": "photo", "n": 1, "file": "assets/01.jpg", "portrait": true, "text": "Fangen wir ganz vorne an. Klein, neu und noch völlig ahnungslos, was da auf ihn zukommt."}, {"type": "photo", "n": 2, "file": "assets/02.jpg", "portrait": false, "text": "Vom ersten Tag an war jemand da, der ihn nicht mehr losgelassen hat. Merkt euch das kurz."}, {"type": "photo", "n": 3, "file": "assets/03.jpg", "portrait": true, "text": "Er hat sich früh angewöhnt zu schauen, wer eigentlich hinter ihm steht. Das macht er bis heute."}, {"type": "chapter", "title": "Child"}, {"type": "photo", "n": 4, "file": "assets/04.jpg", "portrait": true, "text": "Als Kind hatte er große Pläne. Die Umsetzungsquote lag bei ungefähr null. Gestört hat ihn das nie."}, {"type": "photo", "n": 5, "file": "assets/05.jpg", "portrait": true, "text": "Wichtig war nur, dass jemand dabei war, dem er die Pläne erzählen konnte."}, {"type": "photo", "n": 6, "file": "assets/06.jpg", "portrait": false, "text": "Und es war immer jemand dabei."}, {"type": "photo", "n": 7, "file": "assets/07.jpg", "portrait": true, "text": "Irgendwann in diesen Jahren hat er beschlossen, dass er Menschen mag. Er hat das nie zurückgenommen."}, {"type": "photo", "n": 8, "file": "assets/08.jpg", "portrait": true, "text": "Er hat überall mitgeholfen, wo er nicht gebraucht wurde. Mit vollem Ernst."}, {"type": "photo", "n": 9, "file": "assets/09.jpg", "portrait": false, "text": "Und er hat sehr früh gelernt, wie das geht: aufpassen, dass es dem anderen gut geht."}, {"type": "photo", "n": 10, "file": "assets/10.jpg", "portrait": false, "text": "Das ist im Grunde alles, was man über ihn wissen muss. Der Rest sind Orte und Jahreszahlen."}, {"type": "photo", "n": 11, "file": "assets/11.jpg", "portrait": false, "text": "Dann wurde er älter. Die Frisur hat sich mehrfach geändert. Das Prinzip nie."}, {"type": "chapter", "title": "Sam/Raoul"}, {"type": "chapter", "title": "Bonn"}, {"type": "photo", "n": 12, "file": "assets/12.jpg", "portrait": true, "text": "Bonn. Hier fängt die Geschichte an, um die es eigentlich geht – die mit den anderen."}, {"type": "photo", "n": 13, "file": "assets/13.jpg", "portrait": false, "text": "Denn ab hier ist er auf keinem Bild mehr allein. Auf keinem einzigen."}, {"type": "photo", "n": 14, "file": "assets/14.jpg", "portrait": false, "text": "Wer auch immer die Kamera hielt: Sam hatte den Arm schon um jemanden gelegt."}, {"type": "photo", "n": 15, "file": "assets/15.jpg", "portrait": false, "text": "Mit ihm ist man nicht einfach befreundet. Man wird eingesammelt."}, {"type": "chapter", "title": "Johnny!"}, {"type": "photo", "n": 16, "file": "assets/16.jpg", "portrait": true, "text": "Johnny zum Beispiel. Einmal kurz Hallo gesagt – und seitdem nicht mehr weggekommen."}, {"type": "photo", "n": 17, "file": "assets/17.jpg", "portrait": true, "text": "So läuft das bei Sam. Er lernt jemanden kennen und gibt ihn nicht mehr zurück."}, {"type": "photo", "n": 18, "file": "assets/18.jpg", "portrait": false, "text": "Aus einem Freund wurden vier. Aus vier wurde ein Haufen."}, {"type": "chapter", "title": "Valencia"}, {"type": "photo", "n": 19, "file": "assets/19.jpg", "portrait": false, "text": "Dann fing er an zu reisen. Genauer gesagt: Er ist nicht gereist, er ist umgezogen. Mit Begleitung."}, {"type": "photo", "n": 20, "file": "assets/20.jpg", "portrait": false, "text": "Valencia. Andere Stadt, andere Sprache, dieselbe Aufstellung."}, {"type": "photo", "n": 21, "file": "assets/21.jpg", "portrait": false, "text": "Wo Sam auftaucht, ist nach zwei Wochen der Tisch voll."}, {"type": "chapter", "title": "Yves!"}, {"type": "photo", "n": 22, "file": "assets/22.jpg", "portrait": false, "text": "Yves. Siehe Johnny. Auch nie wieder losgeworden."}, {"type": "photo", "n": 23, "file": "assets/23.jpg", "portrait": false, "text": "Langsam war klar: Das ist kein Zufall mehr. Das ist eine Sammlung."}, {"type": "chapter", "title": "Russland"}, {"type": "photo", "n": 24, "file": "assets/24.jpg", "portrait": true, "text": "Irgendwann reichte Europa nicht mehr."}, {"type": "photo", "n": 25, "file": "assets/25.jpg", "portrait": false, "text": "Russland. Er kannte dort niemanden. Nach drei Tagen kannte er alle."}, {"type": "photo", "n": 26, "file": "assets/26.jpg", "portrait": false, "text": "Er kam nie mit Souvenirs nach Hause. Immer mit Menschen."}, {"type": "chapter", "title": "Fabi!"}, {"type": "photo", "n": 27, "file": "assets/27.jpg", "portrait": false, "text": "Fabi. Man verliert irgendwann den Überblick, wer wann dazugekommen ist. Er nicht."}, {"type": "chapter", "title": "Bonn!"}, {"type": "photo", "n": 28, "file": "assets/28.jpg", "portrait": false, "text": "Und dann kam er zurück nach Bonn. Das macht er immer. Er geht weit weg – und er kommt zurück."}, {"type": "chapter", "title": "Digital"}, {"type": "photo", "n": 29, "file": "assets/29.jpg", "portrait": true, "text": "Dann kam die Zeit, in der niemand irgendwohin durfte. Ihn hat das nicht aufgehalten. Er hat die Leute eben durch den Bildschirm festgehalten."}, {"type": "chapter", "title": "Lolya!"}, {"type": "photo", "n": 30, "file": "assets/30.jpg", "portrait": true, "text": "Dann fingen seine Freunde an, Kinder zu bekommen. Und Sam stand sofort mit im Bad. Natürlich stand er das."}, {"type": "chapter", "title": "Florenz"}, {"type": "photo", "n": 31, "file": "assets/31.jpg", "portrait": true, "text": "Zwischendurch hat er auch gearbeitet. Kurz. Das gehört der Vollständigkeit halber dazu."}, {"type": "photo", "n": 32, "file": "assets/32.jpg", "portrait": false, "text": "Florenz. Neue Stadt, gleicher Trick."}, {"type": "photo", "n": 33, "file": "assets/33.jpg", "portrait": false, "text": "Die Jungs von damals sind immer noch da. Nur mit weniger Haaren und mehr Rückenschmerzen."}, {"type": "photo", "n": 34, "file": "assets/34.jpg", "portrait": false, "text": "Und irgendwo hier dreht sich etwas um: Er ist nicht mehr der, der gehalten wird. Er ist der, der hält."}, {"type": "chapter", "title": "Hochzeit"}, {"type": "photo", "n": 35, "file": "assets/35.jpg", "portrait": true, "text": "Dann kam die Phase, in der alle geheiratet haben. Alle bis auf einen."}, {"type": "photo", "n": 36, "file": "assets/36.jpg", "portrait": true, "text": "Und auf jeder dieser Hochzeiten stand er ganz vorne mit dabei. Immer Trauzeuge. Nie Bräutigam."}, {"type": "chapter", "title": "Bonn"}, {"type": "photo", "n": 37, "file": "assets/37.jpg", "portrait": false, "text": "Zurück in Bonn, inzwischen mit deutlich mehr Kindern im Bild."}, {"type": "photo", "n": 38, "file": "assets/38.jpg", "portrait": true, "text": "Bei den Kindern seiner Freunde ist er der Lieblingserwachsene. Das ist ein Vollzeitjob."}, {"type": "photo", "n": 39, "file": "assets/39.jpg", "portrait": true, "text": "Er macht es genauso wie mit sechs: gucken, dass es allen gut geht."}, {"type": "photo", "n": 40, "file": "assets/40.jpg", "portrait": true, "text": "Die Freunde von früher, die Kinder von heute, alle auf einem Sofa."}, {"type": "photo", "n": 41, "file": "assets/41.jpg", "portrait": false, "text": "Es musste nie etwas Besonderes sein. Es musste nur jemand dabei sein."}, {"type": "photo", "n": 42, "file": "assets/42.jpg", "portrait": false, "text": "Und es war immer jemand dabei. Immer."}, {"type": "photo", "n": 43, "file": "assets/43.jpg", "portrait": false, "text": "Irgendwann kann man das nicht mehr Freundeskreis nennen. Das ist Familie."}, {"type": "chapter", "title": "Hochzeit Johnny"}, {"type": "photo", "n": 44, "file": "assets/44.jpg", "portrait": false, "text": "Johnny hat geheiratet. Sam stand daneben. Da, wo er immer steht."}, {"type": "photo", "n": 45, "file": "assets/45.jpg", "portrait": true, "text": "Er hat sich für jeden einzelnen ehrlich gefreut. Das können nicht viele."}, {"type": "photo", "n": 46, "file": "assets/46.jpg", "portrait": true, "text": "Und nebenbei hat er weiter auf alle aufgepasst."}, {"type": "photo", "n": 47, "file": "assets/47.jpg", "portrait": true, "text": "Er kriegt jedes Kind ruhig. Das ist unheimlich, aber sehr praktisch."}, {"type": "photo", "n": 48, "file": "assets/48.jpg", "portrait": false, "text": "Er war bei allem dabei. Bei jedem Umzug, bei jeder Trennung, bei jedem Kater danach."}, {"type": "photo", "n": 49, "file": "assets/49.jpg", "portrait": false, "text": "Wenn man Sam einmal hat, dann hat man ihn."}, {"type": "chapter", "title": "Berlin"}, {"type": "photo", "n": 50, "file": "assets/50.jpg", "portrait": true, "text": "Berlin. Er ist einmal alleine losgezogen. Das hat ungefähr vier Minuten gehalten."}, {"type": "photo", "n": 51, "file": "assets/51.jpg", "portrait": false, "text": "Danach war das Adressbuch wieder voll."}, {"type": "photo", "n": 52, "file": "assets/52.jpg", "portrait": false, "text": "Er hat inzwischen in ziemlich vielen Städten Leute, die ihn vermissen."}, {"type": "photo", "n": 53, "file": "assets/53.jpg", "portrait": true, "text": "Sein ganzes Leben lang stand er neben anderen, wenn die ihren großen Tag hatten.\n\nHeute steht er endlich selbst in der Mitte."}]</script>
+<script>
+const KEY = "sam-wedding-story-v1";
+const SLIDES = JSON.parse(document.getElementById("slides-data").textContent);
+
+/* notes: localStorage wins if present, otherwise whatever is baked into the file */
+const stored = JSON.parse(localStorage.getItem(KEY) || "null");
+if (stored) SLIDES.forEach((s,i)=>{ if(s.type==="photo" && stored[i]!=null) s.text = stored[i]; });
+
+const $ = s => document.querySelector(s);
+const doc = $("#doc"), stage = $("#stage");
+let saveTimer;
+
+function persist(){
+  const notes = {};
+  SLIDES.forEach((s,i)=>{ if(s.type==="photo") notes[i] = s.text; });
+  localStorage.setItem(KEY, JSON.stringify(notes));
+  document.getElementById("slides-data").textContent = JSON.stringify(SLIDES).replace(/<\//g,"<\\/");
+  $("#status").textContent = "gespeichert " + new Date().toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"});
+}
+function queueSave(){ clearTimeout(saveTimer); $("#status").textContent="…"; saveTimer=setTimeout(persist,600); }
+
+/* ---------- build write mode ---------- */
+SLIDES.forEach((s,i)=>{
+  if(s.type==="chapter"){
+    const h=document.createElement("div"); h.className="chapter";
+    h.innerHTML='<h2></h2><i></i>'; h.querySelector("h2").textContent=s.title; doc.appendChild(h);
+    return;
+  }
+  const row=document.createElement("div"); row.className="row"; row.dataset.idx=i;
+  const t=document.createElement("div"); t.className="thumb";
+  t.innerHTML='<img loading="lazy" src="'+s.file+'" alt=""><span class="num">'+s.n+'</span>';
+  const wrap=document.createElement("div"); wrap.className="say";
+  const ta=document.createElement("textarea");
+  ta.placeholder="Was sagen wir zu diesem Bild?";
+  ta.value=s.text||"";
+  const meta=document.createElement("div"); meta.className="meta";
+  const words=()=>{const w=ta.value.trim()?ta.value.trim().split(/\s+/).length:0;
+    meta.innerHTML="<span>Bild "+s.n+" von 53</span><span>"+w+" W&ouml;rter &middot; ca. "+Math.max(1,Math.round(w/2.4))+" Sek.</span>";};
+  const grow=()=>{ta.style.height="auto";ta.style.height=ta.scrollHeight+"px";};
+  ta.addEventListener("input",()=>{ s.text=ta.value; grow(); words(); queueSave(); });
+  wrap.append(ta,meta); row.append(t,wrap); doc.appendChild(row);
+  requestAnimationFrame(()=>{grow();words();});
+});
+
+/* ---------- build present mode ---------- */
+function buildStage(){
+  stage.innerHTML="";
+  SLIDES.forEach((s)=>{
+    const d=document.createElement("div");
+    if(s.type==="chapter"){ d.className="slide chap"; const h=document.createElement("h2"); h.textContent=s.title; d.appendChild(h); }
+    else{
+      d.className = (s.text||"").trim() ? "slide" : "slide solo";
+      const p=document.createElement("div"); p.className="ph";
+      const im=document.createElement("img"); im.src=s.file; im.alt=""; p.appendChild(im);
+      const say=document.createElement("div"); say.className="say"; say.textContent=s.text||"";
+      d.append(p,say);
+    }
+    stage.appendChild(d);
+  });
+}
+function setMode(on){
+  document.body.classList.toggle("present",on);
+  $("#mode").innerHTML = on ? "Bearbeiten &#9998;" : "Pr&auml;sentation &#9654;";
+  if(on){ buildStage(); stage.scrollTop=0; hud(); }
+}
+function hud(){
+  const slides=[...stage.children]; const h=stage.clientHeight;
+  const i=Math.round(stage.scrollTop/h);
+  let shown=0, chap="";
+  for(let k=0;k<=i && k<slides.length;k++){ if(SLIDES[k].type==="photo") shown++; else chap=SLIDES[k].title; }
+  $("#count").textContent = SLIDES[i] && SLIDES[i].type==="photo" ? shown+" / 53" : "";
+  $("#chapNow").textContent = chap;
+  $("#fill").style.width = ((i/(slides.length-1))*100)+"%";
+}
+stage.addEventListener("scroll",()=>{clearTimeout(stage._t);stage._t=setTimeout(hud,90)});
+function step(dir){
+  const h=stage.clientHeight;
+  stage.scrollTo({top:Math.max(0,(Math.round(stage.scrollTop/h)+dir))*h,behavior:"smooth"});
+}
+
+/* ---------- controls ---------- */
+$("#mode").onclick=()=>setMode(!document.body.classList.contains("present"));
+addEventListener("keydown",e=>{
+  if(e.target.tagName==="TEXTAREA"){ if(e.key==="Escape") e.target.blur(); return; }
+  const p=document.body.classList.contains("present");
+  if(e.key==="p"||e.key==="P"){ setMode(!p); return; }
+  if(!p) return;
+  if([" ","ArrowDown","ArrowRight","PageDown"].includes(e.key)){e.preventDefault();step(1);}
+  if(["ArrowUp","ArrowLeft","PageUp"].includes(e.key)){e.preventDefault();step(-1);}
+  if(e.key==="Escape") setMode(false);
+  if(e.key==="f"||e.key==="F"){ document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen(); }
+  if(e.key==="Home") stage.scrollTo({top:0,behavior:"smooth"});
+});
+let hideT;
+addEventListener("mousemove",()=>{
+  if(!document.body.classList.contains("present")) return;
+  $("#bar").classList.remove("hidden"); clearTimeout(hideT);
+  hideT=setTimeout(()=>$("#bar").classList.add("hidden"),2200);
+});
+
+$("#save").onclick=()=>{
+  persist();
+  const notes={}; SLIDES.forEach((s,i)=>{if(s.type==="photo")notes[i]=s.text;});
+  dl(new Blob([JSON.stringify(notes,null,1)],{type:"application/json"}),"sam-story-texte.json");
+};
+$("#loadBtn").onclick=()=>$("#loadFile").click();
+$("#loadFile").onchange=e=>{
+  const f=e.target.files[0]; if(!f) return;
+  f.text().then(t=>{ const n=JSON.parse(t);
+    SLIDES.forEach((s,i)=>{ if(s.type==="photo"&&n[i]!=null) s.text=n[i]; });
+    persist(); location.reload();
+  });
+};
+$("#export").onclick=()=>{
+  persist();
+  const html="<!doctype html>\n"+document.documentElement.outerHTML;
+  dl(new Blob([html],{type:"text/html"}),"Sam-Story-FERTIG.html");
+  alert("Gespeichert als 'Sam-Story-FERTIG.html'.\n\nWICHTIG: Die Datei muss im selben Ordner liegen wie der Ordner 'assets' – sonst fehlen die Bilder.");
+};
+function dl(blob,name){
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=name;
+  a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1500);
+}
+/* click to advance (works with a presenter clicker): right half forward, left half back */
+stage.addEventListener("click",e=>{ step(e.clientX < innerWidth*0.25 ? -1 : 1); });
+
+/* #present starts straight in presentation mode; #present,12 starts at slide 12 */
+if(location.hash.toLowerCase().indexOf("present")>-1){
+  setMode(true);
+  const at=parseInt((location.hash.match(/,(\d+)/)||[])[1],10);
+  if(at>0) addEventListener("load",()=>{                 // wait for images, else we land between slides
+    const prev=stage.style.scrollBehavior; stage.style.scrollBehavior="auto";
+    stage.scrollTop = at*stage.clientHeight;
+    requestAnimationFrame(()=>{ stage.style.scrollBehavior=prev; hud(); });
+  });
+}
+
+$("#status").textContent = stored ? "Texte geladen" : "";
+</script>
+</body>
+</html>
